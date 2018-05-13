@@ -1,0 +1,27 @@
+.floatLeft { float: left;}
+.floatRight { float: right;}
+
+body {
+  height: 100%;
+  background-color: #ffffff;
+}
+.gray{color: gray}
+.floralwhite{color: floralwhite}
+.royalblue{color:royalblue}
+.black{color: #333333}
+.logoBar {
+  height: 65px;
+  border-bottom: solid 1px #e0e0e0;
+  background-color: #f7f7f7;
+  padding: 14px 16px;
+}
+.loginError{
+  margin: 0 !important;
+}
+.loginBox{
+  margin: 5% 20%;
+}
+
+.facebookBox{
+  padding: 81px 44px;
+}
