@@ -7,10 +7,15 @@ class LoginBox extends Component {
     constructor(props){
         super(props);
         this.handleClick = this.handleClick.bind(this);
+        this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
     }
 
     handleClick() {
         this.props.onClick();
+    }
+
+    handleLoginSubmit() {
+        this.props.handleLoginSubmit();
     }
 
     render() {
@@ -36,7 +41,7 @@ class LoginBox extends Component {
                                     placeholder='Password'
                                     type='password'
                                 />
-                                <Button color='teal' fluid size='large'>Login</Button>
+                                <Button color='teal' fluid size='large' onClick={this.handleLoginSubmit}>Login</Button>
                             </Segment>
                         </Form>
                         <Message>

@@ -4,40 +4,43 @@ import RegisterBox from './RegisterBox';
 import LoginFBTG from './LoginFBTG';
 import LogoBar from './LogoBar'
 import { Button, Form, Grid, Header, Image, Message, Segment, Icon, List, Divider } from 'semantic-ui-react'
+import LoginError from './LoginError';
 
 class LoginPage extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            isLoginTap: true
+            isLoginTap: true,
+            isError: false
         }
         this.handleClick = this.handleClick.bind(this);
+        this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
 
     }
 
     handleClick() {
         this.setState(prevState => ({
-            isLoginTap: !prevState.isLoginTap
+            isLoginTap: !prevState.isLoginTap,
+        }));
+    }
+
+    handleLoginSubmit() {
+        this.setState(prevState => ({
+            isError: true
         }));
     }
 
     render() {
         const isLoginTap = this.state.isLoginTap;
-        const box = isLoginTap ? (<LoginBox isLoginTap={isLoginTap} onClick={this.handleClick} />)
+        const box = isLoginTap ? (<LoginBox isLoginTap={isLoginTap} onClick={this.handleClick} handleLoginSubmit={this.handleLoginSubmit} />)
             : (<RegisterBox isLoginTap={isLoginTap} onClick={this.handleClick} />);
 
         return (
             <div>
                 <LogoBar />
                 <div className="loginBox" >
-                    <Grid className='loginError' >
-                        <Grid.Row color='red' textAlign='center'  >
-                            <Grid.Column>
-                                Incorrect Username and Password !!!
-                    </Grid.Column>
-                        </Grid.Row>
-                    </Grid>
+                {this.state.isError > 0 && <LoginError/> }
                     <Segment.Group horizontal  >
                         <Segment padded >
                             {box}

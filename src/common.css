@@ -17,11 +17,21 @@ body {
 }
 .loginError{
   margin: 0 !important;
+  position: absolute;
+  left: 20%;
+  top: 105px;
+  width: 60%;
 }
 .loginBox{
-  margin: 5% 20%;
+  margin: 0% 20%;
+  margin-top: 9%;
 }
 
 .facebookBox{
   padding: 81px 44px;
+}
+.title{
+  color: green !important;
+  font-size: 30px !important;
+  padding-left: 7px !important;
 }

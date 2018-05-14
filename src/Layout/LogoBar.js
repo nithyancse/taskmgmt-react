@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
-import { Icon, Header } from 'semantic-ui-react'
+import { Icon, Header, Image } from 'semantic-ui-react'
 
 
 class LogoBar extends Component {
     render() {
         return (
             <div className="logoBar" >
-                <Header as='h2'   >
-                    <Icon.Group size='big'>
-                        <Icon name='tasks' style ={{color : '#4eb648'}}/>
-                    </Icon.Group>
-                    <span className="black">Task Managment</span>
-                </Header>
+                    <Image src="./images/taskMgmtLogo.png" size='tiny' verticalAlign='middle'  />
+                    <span className="ui header title">Task Management</span>
             </div>
         )
     }
