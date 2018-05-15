@@ -1,5 +1,4 @@
 import React from 'react'
-import LogoBar from './LogoBar'
 import Router from '../Router'
 import { BrowserRouter } from 'react-router-dom';
 const Home = () => (

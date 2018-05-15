@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Icon, Header, Grid } from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 
 
 class LoginError extends Component {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Icon, Header, Image } from 'semantic-ui-react'
+import { Image } from 'semantic-ui-react'
 
 
 class LogoBar extends Component {

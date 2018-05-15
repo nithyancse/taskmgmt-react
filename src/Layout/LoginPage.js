@@ -3,7 +3,7 @@ import LoginBox from './LoginBox';
 import RegisterBox from './RegisterBox';
 import LoginFBTG from './LoginFBTG';
 import LogoBar from './LogoBar'
-import { Button, Form, Grid, Header, Image, Message, Segment, Icon, List, Divider } from 'semantic-ui-react'
+import { Segment, Divider } from 'semantic-ui-react'
 import LoginError from './LoginError';
 
 class LoginPage extends Component {

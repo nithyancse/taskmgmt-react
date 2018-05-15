@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Form, Grid, Header, Image, Message, Segment, Icon, List } from 'semantic-ui-react'
+import { Button, Icon, List } from 'semantic-ui-react'
 
 const LoginFBTG = () => (
   <div className='facebookBox'>
