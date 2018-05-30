@@ -6,7 +6,7 @@ class LogoBar extends Component {
     render() {
         return (
             <div className="logoBar" >
-                    <Image src="./images/taskMgmtLogo.png" size='tiny' verticalAlign='middle'  />
+                    <Image src="./taskMgmtLogo.png" size='tiny' verticalAlign='middle'  />
                     <span className="ui header title">Task Management</span>
             </div>
         )
