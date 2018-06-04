@@ -8,7 +8,7 @@ class LoginError extends Component {
             <Grid className='loginError' >
                 <Grid.Row color='red' textAlign='center'  >
                     <Grid.Column>
-                        Incorrect Username and Password !!!
+                    {this.props.errorMsg}
                     </Grid.Column>
                 </Grid.Row>
             </Grid>
