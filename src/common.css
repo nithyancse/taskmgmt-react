@@ -10,10 +10,10 @@ body {
 .royalblue{color:royalblue}
 .black{color: #333333}
 .logoBar {
-  height: 65px;
+ 
   border-bottom: solid 1px #e0e0e0;
   background-color: #f7f7f7;
-  padding: 14px 16px;
+ 
 }
 .loginError{
   margin: 0 !important;
@@ -23,12 +23,11 @@ body {
   width: 60%;
 }
 .loginBox{
-  margin: 0% 20%;
-  margin-top: 9%;
+  margin-top: 5%;
 }
 
 .facebookBox{
-  padding: 81px 44px;
+  padding: 0px 0px;
 }
 .title{
   color: green !important;

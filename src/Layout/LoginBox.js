@@ -57,6 +57,19 @@ class LoginBox extends Component {
                         </Message>
                     </Grid.Column>
                 </Grid>
+                <Grid columns='equal'>
+                    <Grid.Row >
+                        <Grid.Column width={3} only='mobile'>
+                        </Grid.Column>
+                        <Grid.Column  width={10} only='mobile'>
+                            <Button circular color='facebook' icon='facebook' />
+                            <Button circular color='twitter' icon='twitter' />
+                            <Button circular  icon='github' style={{ color: '#fff', backgroundColor: '#444' }} />
+                        </Grid.Column>
+                        <Grid.Column width={3} only='mobile'>
+                        </Grid.Column>
+                    </Grid.Row >
+                </Grid >
             </div>
         )
     }

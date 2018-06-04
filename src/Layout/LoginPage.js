@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 import RegisterBox from './RegisterBox';
 import LoginFBTG from './LoginFBTG';
 import LogoBar from './LogoBar'
-import { Segment, Divider } from 'semantic-ui-react'
+import { Segment, Divider, Grid, Container,Button } from 'semantic-ui-react'
 import LoginError from './LoginError';
 import axios from 'axios'
 import store from './LoginStore';
@@ -66,18 +66,15 @@ class LoginPage extends Component {
 
     handleSignUpSubmit(emailId, password, confirmPassword) {
 
-        let user = {           // an object
+
+        axios.post('/addUser', {
             emailId: emailId,  // by key "emailId" store value "emailId"
             password: password,
             confirmPassword: confirmPassword
-        };
-
-        axios.post('/addUser', {
-            user: user
         })
             .then(response => {
                 //console.log(response);
-                if (response.status == 200) {
+                if (response.status == 201) {
                     alert("success");
                 }
                 if (response.status == 208) {
@@ -85,6 +82,7 @@ class LoginPage extends Component {
                 }
             })
             .catch(error => {
+                alert("error req");
                 if (error.response.data.status == "BAD_REQUEST") {
                     alert("bad req");
                 }
@@ -94,9 +92,6 @@ class LoginPage extends Component {
     render() {
         const isLoginTap = this.state.isLoginTap;
         const errorMsg = this.state.errorMsg;
-        const box = isLoginTap ?
-            (<LoginBox onClick={this.handleClick} handleLoginSubmit={this.handleLoginSubmit} />) :
-            (<RegisterBox onClick={this.handleClick} handleSignUpSubmit={this.handleSignUpSubmit} />);
 
         if (store.isLoggedIn == "Login") {
             return <Redirect to="/home" />;
@@ -104,20 +99,51 @@ class LoginPage extends Component {
 
         return (
             <div>
-
                 <LogoBar />
-                <div className="loginBox" >
-                    {this.state.isError > 0 && <LoginError errorMsg={errorMsg} />}
-                    <Segment.Group horizontal  >
-                        <Segment padded >
-                            {box}
-                        </Segment>
-                        <Divider vertical style={{ left: '69%' }} >or </Divider>
-                        <div className="floatRight " style={{ width: '30%' }}>
-                            <LoginFBTG />
-                        </div>
-                    </Segment.Group>
-                </div>
+                <Container >
+                    <div className="loginBox" >
+                        {this.state.isError > 0 && <LoginError errorMsg={errorMsg} />}
+                        {isLoginTap &&
+                            <Grid columns='equal'>
+                                <Grid.Row stretched>
+                                    <Grid.Column width={2} only='computer tablet'>
+                                    </Grid.Column>
+                                    <Grid.Column width={7} only='computer tablet'>
+                                        <Segment>
+                                            <LoginBox onClick={this.handleClick} handleLoginSubmit={this.handleLoginSubmit} />
+                                        </Segment>
+                                    </Grid.Column>
+                                    <Grid.Column only='mobile'>
+                                        <Segment>
+                                            <LoginBox onClick={this.handleClick} handleLoginSubmit={this.handleLoginSubmit} />
+                                        </Segment>
+                                    </Grid.Column>
+                                    <Grid.Column width={1} only='computer tablet'>
+                                        <Divider vertical  >or </Divider>
+                                    </Grid.Column>
+                                    <Grid.Column width={4} only='computer tablet'>
+                                        <Segment > <LoginFBTG /></Segment>
+                                    </Grid.Column>
+                                    <Grid.Column width={2} only='computer tablet'>
+                                    </Grid.Column>
+                                </Grid.Row>
+                            </Grid>
+                        }
+                        {!isLoginTap &&
+                            <Grid columns='equal'>
+                                <Grid.Column width={3} only='computer tablet'>
+                                </Grid.Column>
+                                <Grid.Column>
+                                    <Segment>
+                                        <RegisterBox onClick={this.handleClick} handleSignUpSubmit={this.handleSignUpSubmit} />
+                                    </Segment>
+                                </Grid.Column>
+                                <Grid.Column width={3} only='computer tablet'>
+                                </Grid.Column>
+                            </Grid>
+                        }
+                    </div>
+                </Container>
             </div>
         )
     }

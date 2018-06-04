@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Message, Segment, Label } from 'semantic-ui-react'
 
 class RegisterBox extends Component {
 
@@ -20,7 +20,7 @@ class RegisterBox extends Component {
     render() {
         return (
             <Grid textAlign='center'>
-                <Grid.Column style={{ maxWidth: 450 }}>
+                <Grid.Column style={{ maxWidth: 600 }}>
                     <Header as='h2' color='teal' textAlign='center'>
                         Sign Up your account
                     </Header>
@@ -34,7 +34,9 @@ class RegisterBox extends Component {
                                         ref={(emailId) => this.emailId = emailId}
                                     />
                                     <i aria-hidden="true" className="user icon"></i>
+                                    <Label pointing='left'>That name is taken!</Label>
                                 </div>
+                                
                             </Form.Field>
                             <Form.Field>
                                 <div className="ui left icon input">
@@ -44,7 +46,9 @@ class RegisterBox extends Component {
                                         ref={(password) => this.password = password}
                                     />
                                     <i aria-hidden="true" className="lock icon"></i>
+                                    <Label pointing='left'>That name is taken!</Label>
                                 </div>
+                                
                             </Form.Field>
                             <Form.Field>
                                 <div className="ui left icon input">
@@ -54,7 +58,9 @@ class RegisterBox extends Component {
                                         ref={(confirmPassword) => this.confirmPassword = confirmPassword}
                                     />
                                     <i aria-hidden="true" className="lock icon"></i>
+                                    <Label pointing='left'>That name is taken!</Label>
                                 </div>
+                               
                             </Form.Field>
                             <Button color='teal' fluid size='large' onClick={this.handleSignUpSubmit}>Sign Up</Button>
                         </Segment>

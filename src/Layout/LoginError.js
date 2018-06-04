@@ -5,7 +5,7 @@ import { Grid } from 'semantic-ui-react'
 class LoginError extends Component {
     render() {
         return (
-            <Grid className='loginError' >
+            <Grid className='loginError1' >
                 <Grid.Row color='red' textAlign='center'  >
                     <Grid.Column>
                     {this.props.errorMsg}
