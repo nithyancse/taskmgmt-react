@@ -1,17 +1,11 @@
 import React, { Component } from 'react';
-import { Grid } from 'semantic-ui-react'
+import { Grid, Button } from 'semantic-ui-react'
 
 
 class LoginError extends Component {
     render() {
         return (
-            <Grid className='loginError1' >
-                <Grid.Row color='red' textAlign='center'  >
-                    <Grid.Column>
-                    {this.props.errorMsg}
-                    </Grid.Column>
-                </Grid.Row>
-            </Grid>
+            <Button negative>{this.props.errorMsg}</Button>
         )
     }
 }

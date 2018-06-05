@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form, Grid, Header, Message, Segment } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Message, Segment, Divider } from 'semantic-ui-react'
 
 class LoginBox extends Component {
 
@@ -23,7 +23,7 @@ class LoginBox extends Component {
         return (
             <div>
                 <Grid textAlign='center'>
-                    <Grid.Column style={{ maxWidth: 450 }}>
+                    <Grid.Column style={{ maxWidth: 550 }}>
                         <Header as='h2' color='teal' textAlign='center'>
                             Login to your account
                         </Header>
@@ -52,24 +52,35 @@ class LoginBox extends Component {
                                 <Button color='teal' fluid size='large' onClick={this.handleLoginSubmit}>Login</Button>
                             </Segment>
                         </Form>
-                        <Message>
-                            New to us?  <a href='#' onClick={this.handleClick}>Sign Up</a>
-                        </Message>
                     </Grid.Column>
                 </Grid>
-                <Grid columns='equal'>
+
+                <Grid columns='equal' className="center aligned" >
                     <Grid.Row >
-                        <Grid.Column width={3} only='mobile'>
+                        <Grid.Column  >
+                            <Message>
+                                New to us?  <a href='#' onClick={this.handleClick}>Sign Up</a>
+                            </Message>
                         </Grid.Column>
-                        <Grid.Column  width={10} only='mobile'>
+                        <Grid.Column width={1} only='computer'>
+                            <Divider vertical>Or</Divider>
+                        </Grid.Column>
+
+                        <Grid.Column width={6} only='computer'>
                             <Button circular color='facebook' icon='facebook' />
                             <Button circular color='twitter' icon='twitter' />
-                            <Button circular  icon='github' style={{ color: '#fff', backgroundColor: '#444' }} />
+                            <Button circular icon='github' style={{ color: '#fff', backgroundColor: '#444' }} />
                         </Grid.Column>
-                        <Grid.Column width={3} only='mobile'>
+                    </Grid.Row >
+                    <Grid.Row only='tablet mobile'>
+                        <Grid.Column>
+                            <Button circular color='facebook' icon='facebook' />
+                            <Button circular color='twitter' icon='twitter' />
+                            <Button circular icon='github' style={{ color: '#fff', backgroundColor: '#444' }} />
                         </Grid.Column>
                     </Grid.Row >
                 </Grid >
+
             </div>
         )
     }

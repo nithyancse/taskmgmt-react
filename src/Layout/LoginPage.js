@@ -4,7 +4,7 @@ import { observer } from 'mobx-react';
 import RegisterBox from './RegisterBox';
 import LoginFBTG from './LoginFBTG';
 import LogoBar from './LogoBar'
-import { Segment, Divider, Grid, Container,Button } from 'semantic-ui-react'
+import { Segment, Divider, Grid, Container, Button } from 'semantic-ui-react'
 import LoginError from './LoginError';
 import axios from 'axios'
 import store from './LoginStore';
@@ -102,44 +102,42 @@ class LoginPage extends Component {
                 <LogoBar />
                 <Container >
                     <div className="loginBox" >
-                        {this.state.isError > 0 && <LoginError errorMsg={errorMsg} />}
                         {isLoginTap &&
                             <Grid columns='equal'>
                                 <Grid.Row stretched>
-                                    <Grid.Column width={2} only='computer tablet'>
+                                    <Grid.Column width={9} only='computer tablet'>
                                     </Grid.Column>
                                     <Grid.Column width={7} only='computer tablet'>
+                                    {this.state.isError > 0 && <LoginError errorMsg={errorMsg} />}
                                         <Segment>
                                             <LoginBox onClick={this.handleClick} handleLoginSubmit={this.handleLoginSubmit} />
                                         </Segment>
                                     </Grid.Column>
                                     <Grid.Column only='mobile'>
+                                    {this.state.isError > 0 && <LoginError errorMsg={errorMsg} />}
                                         <Segment>
                                             <LoginBox onClick={this.handleClick} handleLoginSubmit={this.handleLoginSubmit} />
                                         </Segment>
-                                    </Grid.Column>
-                                    <Grid.Column width={1} only='computer tablet'>
-                                        <Divider vertical  >or </Divider>
-                                    </Grid.Column>
-                                    <Grid.Column width={4} only='computer tablet'>
-                                        <Segment > <LoginFBTG /></Segment>
-                                    </Grid.Column>
-                                    <Grid.Column width={2} only='computer tablet'>
                                     </Grid.Column>
                                 </Grid.Row>
                             </Grid>
                         }
                         {!isLoginTap &&
                             <Grid columns='equal'>
-                                <Grid.Column width={3} only='computer tablet'>
-                                </Grid.Column>
-                                <Grid.Column>
-                                    <Segment>
-                                        <RegisterBox onClick={this.handleClick} handleSignUpSubmit={this.handleSignUpSubmit} />
-                                    </Segment>
-                                </Grid.Column>
-                                <Grid.Column width={3} only='computer tablet'>
-                                </Grid.Column>
+                                <Grid.Row stretched>
+                                    <Grid.Column width={9} only='computer tablet'>
+                                    </Grid.Column>
+                                    <Grid.Column width={7} only='computer tablet'>
+                                        <Segment>
+                                            <RegisterBox onClick={this.handleClick} handleSignUpSubmit={this.handleSignUpSubmit} />
+                                        </Segment>
+                                    </Grid.Column>
+                                    <Grid.Column only='mobile'>
+                                        <Segment>
+                                            <RegisterBox onClick={this.handleClick} handleSignUpSubmit={this.handleSignUpSubmit} />
+                                        </Segment>
+                                    </Grid.Column>
+                                </Grid.Row>
                             </Grid>
                         }
                     </div>
