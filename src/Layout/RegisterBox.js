@@ -1,10 +1,18 @@
 import React, { Component } from 'react';
 import { Button, Form, Grid, Header, Message, Segment, Label } from 'semantic-ui-react'
+import store from './LoginStore';
+import { observer } from 'mobx-react';
 
+@observer
 class RegisterBox extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            emailIdErr: '',
+            passwordErr: '',
+            confirmPasswordErr: '',
+        }
         this.handleClick = this.handleClick.bind(this);
         this.handleSignUpSubmit = this.handleSignUpSubmit.bind(this);
     }
@@ -17,7 +25,20 @@ class RegisterBox extends Component {
         this.props.handleSignUpSubmit(this.emailId.value, this.password.value, this.confirmPassword.value)
     }
 
+    componentDidMount() {
+        this.setState({
+            emailIdErr: store.custError.emailId,
+            passwordErr: store.custError.password,
+            confirmPasswordErr: store.custError.confirmPassword,
+        });
+    }
+
     render() {
+
+        const emailIdErr = this.state.emailId;
+        const passwordErr = this.state.password;
+        const confirmPasswordErr = this.state.confirmPassword;
+
         return (
             <Grid textAlign='center'>
                 <Grid.Column style={{ maxWidth: 600 }}>
@@ -34,9 +55,8 @@ class RegisterBox extends Component {
                                         ref={(emailId) => this.emailId = emailId}
                                     />
                                     <i aria-hidden="true" className="user icon"></i>
-                                    <Label pointing='left'>That name is taken!</Label>
+                                    <Label pointing='left'>{emailIdErr}</Label>
                                 </div>
-                                
                             </Form.Field>
                             <Form.Field>
                                 <div className="ui left icon input">
@@ -46,9 +66,8 @@ class RegisterBox extends Component {
                                         ref={(password) => this.password = password}
                                     />
                                     <i aria-hidden="true" className="lock icon"></i>
-                                    <Label pointing='left'>That name is taken!</Label>
+                                    <Label pointing='left'>{store.custError.password}</Label>
                                 </div>
-                                
                             </Form.Field>
                             <Form.Field>
                                 <div className="ui left icon input">
@@ -60,7 +79,6 @@ class RegisterBox extends Component {
                                     <i aria-hidden="true" className="lock icon"></i>
                                     <Label pointing='left'>That name is taken!</Label>
                                 </div>
-                               
                             </Form.Field>
                             <Button color='teal' fluid size='large' onClick={this.handleSignUpSubmit}>Sign Up</Button>
                         </Segment>

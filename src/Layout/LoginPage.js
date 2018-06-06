@@ -6,6 +6,7 @@ import LoginFBTG from './LoginFBTG';
 import LogoBar from './LogoBar'
 import { Segment, Divider, Grid, Container, Button } from 'semantic-ui-react'
 import LoginError from './LoginError';
+import LoginSuccess from './LoginSuccess';
 import axios from 'axios'
 import store from './LoginStore';
 import { Redirect } from 'react-router'
@@ -17,14 +18,15 @@ class LoginPage extends Component {
         super(props);
         this.state = {
             isLoginTap: true,
-            isError: false,
             errorMsg: '',
             emailId: '',
-            password: ''
+            password: '',
+            resStatus: '',
+            custResponse: '',
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
-
+        this.handleSignUpSubmit = this.handleSignUpSubmit.bind(this);
     }
 
     handleClick() {
@@ -49,16 +51,14 @@ class LoginPage extends Component {
                     store.isLoggedIn = "Login";
                     this.setState({
                         errorMsg: "",
-                        isError: false,
                         isLoggedIn: true
                     });
                 }
             })
             .catch(error => {
-                if (error.response.data.status == "BAD_REQUEST") {
+                if (error.response.status == 400) {
                     this.setState({
                         errorMsg: error.response.data.message,
-                        isError: true
                     });
                 }
             });
@@ -73,25 +73,30 @@ class LoginPage extends Component {
             confirmPassword: confirmPassword
         })
             .then(response => {
-                //console.log(response);
-                if (response.status == 201) {
-                    alert("success");
-                }
-                if (response.status == 208) {
-                    alert("already user registered");
+                if (response.status == 201 || response.status == 208) {
+                    this.setState({
+                        custResponse: response.data.message,
+                    });
                 }
             })
             .catch(error => {
-                alert("error req");
-                if (error.response.data.status == "BAD_REQUEST") {
-                    alert("bad req");
+                console.log(error.response);
+                if (error.response.status == 400) {
+                    var obj = {};
+                    for (let user of error.response.data.fieldErrors) {
+                        obj[user.field] = user.defaultMessage;
+                    }
+                    store.custError = obj;
                 }
             });
+
     }
 
     render() {
         const isLoginTap = this.state.isLoginTap;
         const errorMsg = this.state.errorMsg;
+        const resStatus = this.state.resStatus;
+        const custResponse = this.state.custResponse;
 
         if (store.isLoggedIn == "Login") {
             return <Redirect to="/home" />;
@@ -108,13 +113,13 @@ class LoginPage extends Component {
                                     <Grid.Column width={9} only='computer tablet'>
                                     </Grid.Column>
                                     <Grid.Column width={7} only='computer tablet'>
-                                    {this.state.isError > 0 && <LoginError errorMsg={errorMsg} />}
+                                        {errorMsg.length > 0 && <LoginError message={errorMsg} />}
                                         <Segment>
                                             <LoginBox onClick={this.handleClick} handleLoginSubmit={this.handleLoginSubmit} />
                                         </Segment>
                                     </Grid.Column>
                                     <Grid.Column only='mobile'>
-                                    {this.state.isError > 0 && <LoginError errorMsg={errorMsg} />}
+                                        {errorMsg.length > 0 && <LoginError message={errorMsg} />}
                                         <Segment>
                                             <LoginBox onClick={this.handleClick} handleLoginSubmit={this.handleLoginSubmit} />
                                         </Segment>
@@ -128,11 +133,13 @@ class LoginPage extends Component {
                                     <Grid.Column width={9} only='computer tablet'>
                                     </Grid.Column>
                                     <Grid.Column width={7} only='computer tablet'>
+                                        {custResponse.length > 0 && <LoginSuccess message={custResponse} />}
                                         <Segment>
                                             <RegisterBox onClick={this.handleClick} handleSignUpSubmit={this.handleSignUpSubmit} />
                                         </Segment>
                                     </Grid.Column>
                                     <Grid.Column only='mobile'>
+                                        {custResponse > 0 && <LoginSuccess message={custResponse} />}
                                         <Segment>
                                             <RegisterBox onClick={this.handleClick} handleSignUpSubmit={this.handleSignUpSubmit} />
                                         </Segment>
