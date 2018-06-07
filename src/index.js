@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './common.css';
-import Home from './Home';
+import LandingPage from './LandingPage';
 
-ReactDOM.render( <Home /> , document.getElementById('root'));
+ReactDOM.render( <LandingPage /> , document.getElementById('root'));
 

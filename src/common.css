@@ -47,3 +47,17 @@ body {
 .textaligncenter{
   text-align: center;
 }
+
+.padLR7{
+  padding : 0 7px;
+}
+
+.error{
+  color : floralwhite;
+  background-color: indianred;
+}
+
+.success{
+  color : floralwhite;
+  background-color: limegreen;
+}

@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
-import LogoBar from './LogoBar'
 import { observer } from 'mobx-react';
-import store from './LoginStore';
 import { Redirect } from 'react-router'
+import LogoBar from '../Layout/LogoBar'
+import homeStore from './HomeStore';
+
 
 @observer
-class MainHome extends Component {
+class Home extends Component {
 
     render() {
         
         return (
             <div>
                 <LogoBar />
-                <div className="content"> Hi {store.user.name}, Welcome to Task Management Application !! </div>
+                <div className="content"> Hi {homeStore.user.name}, Welcome to Task Management Application !! </div>
             </div>
         )
     }
 }
 
-export default MainHome
+export default Home

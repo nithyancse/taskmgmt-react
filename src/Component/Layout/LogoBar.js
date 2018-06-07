@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
 import { Image, Header } from 'semantic-ui-react'
 import { observer } from 'mobx-react';
-import store from './LoginStore';
 import { Redirect } from 'react-router'
+import homeStore from '../Home/HomeStore';
 
 @observer
 class LogoBar extends Component {
 
     handleClick() {
-        store.isLoggedIn = "Logout"
+        homeStore.isLoggedIn = "Logout"
     }
 
     render() {
 
-        if (store.isLoggedIn == "Logout") {
+        if (homeStore.isLoggedIn == "Logout") {
             return <Redirect to="/" />;
         }
 
-        const loginStatus = store.isLoggedIn == "Login" ? true : false;
+        const loginStatus = homeStore.isLoggedIn == "Login" ? true : false;
 
         return (
             <div className="logoBar" >

@@ -1,11 +1,11 @@
+import axios from 'axios'
 import React from 'react'
 import Router from './Router'
 import { BrowserRouter } from 'react-router-dom';
-import axios from 'axios'
 
 axios.defaults.baseURL = 'http://localhost:9000/taskmgmt';
 
-const Home = () => (
+const LandingPage = () => (
     <div>
         <BrowserRouter>
             <Router />
@@ -13,4 +13,4 @@ const Home = () => (
     </div>
 )
 
-export default Home
+export default LandingPage
