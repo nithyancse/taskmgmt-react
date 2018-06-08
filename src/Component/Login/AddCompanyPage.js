@@ -1,5 +1,4 @@
 import axios from 'axios'
-import Dropzone from 'react-dropzone'
 import React, { Component } from 'react';
 import { observer } from 'mobx-react';
 import { Redirect } from 'react-router'
@@ -28,7 +27,6 @@ class AddCompanyPage extends Component {
 
         alert(file);
 
-
         if (!name) {
             this.inputRef.focus();
             return false;
@@ -36,14 +34,15 @@ class AddCompanyPage extends Component {
 
 
         const formData = new FormData();
-        formData.append('file', file)
-        formData.append('name', name)
-        formData.append('updatedBy', homeStore.user.id)
+        formData.append('logo', file);
+        formData.append('name', name);
+        formData.append('created_by', homeStore.user.id);
+        formData.append('updatedBy', homeStore.user.id);
 
 
         axios.post("/addCompany", formData)
             .then(response => {
-                alert("tgtyty");
+                alert("success file");
                 console.log(response);
                 if (response.status == 201) {
                     homeStore.setName(name);
@@ -60,7 +59,7 @@ class AddCompanyPage extends Component {
                     });
                 }
                 if (error.response.status == 400 || error.response.status == 404 || error.response.status == 500) {
-                    this.props.handleMessage(error.response.data.message, "red");
+                    //this.props.handleMessage(error.response.data.message, "red");
                 }
             });
     }
