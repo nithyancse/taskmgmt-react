@@ -1,32 +1,39 @@
 import React, { Component } from 'react';
 import { Image, Header } from 'semantic-ui-react'
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 import { Redirect } from 'react-router'
-import homeStore from '../Home/HomeStore';
 
+@inject(['store'])
 @observer
 class LogoBar extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            pageToRedirect: ""
+        }
+    }
+
     handleClick() {
-        homeStore.isLoggedIn = "Logout"
+        this.setState({
+            pageToRedirect: "Logout"
+        });
     }
 
     render() {
 
-        if (homeStore.isLoggedIn == "Logout") {
+        if (this.state.pageToRedirect === "Logout") {
             return <Redirect to="/" />;
-        }
-
-        const loginStatus = homeStore.isLoggedIn == "Login" ? true : false;
+        }      
 
         return (
             <div className="logoBar" >
                 <Header as='h1' color='grey' >
                     <Image circular src="public/images/taskMgmtLogo.png" /> Task Management
                 </Header>
-                { loginStatus &&
+                
                 <a className="floatRight" href='#' onClick={this.handleClick.bind(this)}>Logout</a>
-                }
+                
             </div>
         )
     }

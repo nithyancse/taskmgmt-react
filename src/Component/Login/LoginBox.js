@@ -2,11 +2,11 @@ import axios from 'axios'
 import React, { Component } from 'react';
 import { Button, Form, Grid, Header, Message, Segment, Divider, Label } from 'semantic-ui-react'
 import { Redirect } from 'react-router'
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 import { isValidEmailId } from '../../Util/ValidationUtil'
 import constants from '../../Constant/Validation'
-import homeStore from '../Home/HomeStore';
 
+@inject(['store'])
 @observer
 class LoginBox extends Component {
 
@@ -54,7 +54,7 @@ class LoginBox extends Component {
 
         if (!status) {
             // don't show this error if any field error is displayed
-            this.props.handleMessage("","");
+            this.props.handleMessage("", "");
             return status;
         }
 
@@ -64,32 +64,32 @@ class LoginBox extends Component {
                 password: this.password.value
             }
         })
-        .then(response => {
-            let name = [];
-            let company = [];
-            let pageToRedirect = "homePage";
+            .then(response => {
+                let name = [];
+                let company = [];
+                let pageToRedirect = "homePage";
 
-            //console.log(response);
-            if (response.status == 200) {
-                homeStore.setUser(response.data.user);
-                homeStore.setCompany(response.data.company);
-                name = response.data.user.name;
-                company = response.data.company;
-                if (!name) {
-                    pageToRedirect = "addNamePage";
-                } else if (!company) {
-                    pageToRedirect = "addCompanyPage";
+                //console.log(response);
+                if (response.status == 200) {
+                    this.props.store.home.setUser(response.data.user);
+                    this.props.store.home.setCompany(response.data.company); 
+                    name =  this.props.store.home.user.name;
+                    company =  this.props.store.home.company;   
+                    if (!name) {
+                        pageToRedirect = "addNamePage";
+                    } else if (!company) {
+                        pageToRedirect = "addCompanyPage";
+                    }
+                    this.setState({
+                        pageToRedirect: pageToRedirect
+                    });
                 }
-                this.setState({
-                    pageToRedirect: pageToRedirect
-                });
-            }
-        })
-        .catch(error => {
-            if (error.response.status == 400 || error.response.status == 404 || error.response.status == 500) {
-                this.props.handleMessage(error.response.data.message, "red");
-            }
-        });
+            })
+            .catch(error => {
+                if (error.response.status == 400 || error.response.status == 404 || error.response.status == 500) {
+                    this.props.handleMessage(error.response.data.message, "red");
+                }
+            });
     }
 
     render() {
@@ -152,10 +152,6 @@ class LoginBox extends Component {
                         </Message>
                     </Grid.Column>
                 </Grid>
-
-
-
-
             </div>
         )
     }

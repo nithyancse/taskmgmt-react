@@ -13,7 +13,7 @@ export class HomeStore {
   @action setCompany(company){
     this.company = company;
   }
-  @action setName(name){
+  @action setUserName(name){
     this.user.name = name;
   }
 }

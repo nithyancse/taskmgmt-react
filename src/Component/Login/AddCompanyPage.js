@@ -1,11 +1,11 @@
 import axios from 'axios'
 import React, { Component } from 'react';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 import { Redirect } from 'react-router'
 import { Input, Icon } from 'semantic-ui-react'
 import LogoBar from '../Layout/LogoBar'
-import homeStore from '../Home/HomeStore';
 
+@inject(['store'])
 @observer
 class AddCompanyPage extends Component {
 
@@ -17,39 +17,27 @@ class AddCompanyPage extends Component {
             errorMsg: "",
             file: null,
         }
-        this.onChange = this.onChange.bind(this);
-
     }
 
     handleCompanySubmit(e) {
         let name = this.state.name;
-        let file = this.state.file;
-
-        alert(file);
-
-        if (!name) {
-            this.inputRef.focus();
-            return false;
-        }
-
-
+        let logo = this.state.file;
         const formData = new FormData();
-        formData.append('logo', file);
+        if(logo != null){
+            formData.append('logo', logo);
+        }
+        
         formData.append('name', name);
-        formData.append('created_by', homeStore.user.id);
-        formData.append('updatedBy', homeStore.user.id);
-
+        formData.append('created_by', this.props.store.home.user.id);
+        formData.append('updated_by', this.props.store.home.user.id);
 
         axios.post("/addCompany", formData)
             .then(response => {
-                alert("success file");
-                console.log(response);
-                if (response.status == 201) {
-                    homeStore.setName(name);
-                    this.setState({
-                        pageToRedirect: "addCompanyPage"
-                    });
-                }
+                //console.log(response);
+                this.props.store.home.setCompany(response.data.company);
+                this.setState({
+                    pageToRedirect: "home"
+                });
             })
             .catch(error => {
                 console.log(error.response);
@@ -70,15 +58,15 @@ class AddCompanyPage extends Component {
         });
     }
 
-    onChange(e) {
+    handleFile = e => {
         this.setState({ file: e.target.files[0] })
     }
 
-
-
     render() {
 
-
+        if (this.state.pageToRedirect === "home") {
+            return <Redirect to="/home" />;
+        }
 
         const errorMsg = this.state.errorMsg;
 
@@ -86,19 +74,19 @@ class AddCompanyPage extends Component {
             <div>
                 <LogoBar />
                 <Input ref={this.handleRef} placeholder='Company Name' size='large' onChange={this.handleMessage} />
+                {errorMsg.length > 0 && <span style={{ color: "red" }}>{this.state.errorMsg}</span>}
 
                 <div className="ui left icon input">
                     <input
                         placeholder='Password'
                         type="file"
-                        onChange={this.onChange}
+                        onChange={this.handleFile}
                     />
 
                 </div>
 
 
                 <span className="padLR7" ><Icon name='arrow right' inverted circular link onClick={this.handleCompanySubmit.bind(this)} size="large" /></span>
-                {errorMsg.length > 0 && <span style={{ color: "red" }}>{this.state.errorMsg}</span>}
             </div>
         )
     }

@@ -36,6 +36,10 @@ module.exports = {
     ]
   },
 
+  devServer: {
+    historyApiFallback : true // page should not goes to blank if we refresh
+  },
+
   output: {
     path: path.join(__dirname, '/dist'),
     filename: 'index_bundle.js'

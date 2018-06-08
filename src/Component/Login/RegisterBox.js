@@ -1,7 +1,6 @@
 import axios from 'axios'
 import React, { Component } from 'react'
 import { Button, Form, Grid, Header, Message, Segment, Label } from 'semantic-ui-react'
-import { observer } from 'mobx-react'
 import { isValidEmailId } from '../../Util/ValidationUtil'
 import constants from '../../Constant/Validation'
 

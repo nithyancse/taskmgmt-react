@@ -1,11 +1,11 @@
 import axios from 'axios'
 import React, { Component } from 'react';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 import { Redirect } from 'react-router'
 import { Input, Icon } from 'semantic-ui-react'
 import LogoBar from '../Layout/LogoBar'
-import homeStore from '../Home/HomeStore';
 
+@inject(['store'])
 @observer
 class AddNamePage extends Component {
 
@@ -25,14 +25,14 @@ class AddNamePage extends Component {
             return false;
         }
         var params = new URLSearchParams();
-        params.append('id', homeStore.user.id);
+        params.append('id', this.props.store.home.user.id);
         params.append('name', name);
 
         axios.post('/addName', params)
             .then(response => {
                 //console.log(response);
                 if (response.status == 201) {
-                    homeStore.setName(name);
+                    this.props.store.home.setUserName(name);
                     this.setState({
                         pageToRedirect: "addCompanyPage"
                     });

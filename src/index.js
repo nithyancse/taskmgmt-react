@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './common.css';
-import LandingPage from './LandingPage';
+import Router from '../src/Router/Router';
 
-ReactDOM.render( <LandingPage /> , document.getElementById('root'));
+ReactDOM.render( <Router /> , document.getElementById('root'));
 
