@@ -15,13 +15,7 @@ body {
   background-color: #f7f7f7;
  
 }
-.loginError{
-  margin: 0 !important;
-  position: absolute;
-  left: 20%;
-  top: 105px;
-  width: 60%;
-}
+
 .loginBox{
   margin-top: 5%;
 }
@@ -49,7 +43,7 @@ body {
 }
 
 .padLR7{
-  padding : 0 7px;
+  padding : 0 4px;
 }
 
 .error{
@@ -60,4 +54,16 @@ body {
 .success{
   color : floralwhite;
   background-color: limegreen;
+}
+
+.red {
+  color: red;
+}
+
+.tasklogo{
+  margin-right: 1em;
+}
+
+.footer{
+  padding: 3em !important;
 }

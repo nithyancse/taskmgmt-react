@@ -1,10 +1,12 @@
 import axios from 'axios'
 import React, { Component } from 'react'
+import { Redirect } from 'react-router'
 import { Button, Form, Grid, Header, Message, Segment, Label } from 'semantic-ui-react'
-import { isValidEmailId } from '../../Util/ValidationUtil'
-import constants from '../../Constant/Validation'
+import { isValidEmailId } from '../../../Util/ValidationUtil'
+import constValid from '../../../Constant/Validation'
+import Common from '../../../Constant/Common'
 
-class RegisterBox extends Component {
+class SignupBox extends Component {
 
     constructor(props) {
         super(props);
@@ -12,39 +14,99 @@ class RegisterBox extends Component {
             emailId: "",
             password: "",
             confirmPassword: "",
+            pageToRedirect:"",
         }
         this.handleClick = this.handleClick.bind(this);
         this.handleSignUpSubmit = this.handleSignUpSubmit.bind(this);
     }
 
     handleClick() {
-        this.props.onClick();
+        this.setState({
+            pageToRedirect: Common.LOGIN,
+        });
     }
 
     handleSignUpSubmit(e) {
+        let registerForm = document.getElementById("registerForm");
+        let isValid = this.validateRegisterForm(e);
+        let color = "green";
+        if (!isValid) {
+            this.props.handleMessage("", ""); // don't show this error(parent class) if any field error is displayed
+            return false;
+        } else {
+            e.preventDefault();
+            registerForm.classList.add("loading");
+        }
 
+        //add the new user 
+        axios.post('/addUser', {
+            emailId: this.emailId.value,
+            password: this.password.value,
+            confirmPassword: this.confirmPassword.value
+        })
+            .then(response => {
+                //console.log(response);
+                if (response.status == 201 || response.status == 208) {
+                    //clear the errors from server if successfullly registerd
+                    this.setState({
+                        emailId: "",
+                        password: "",
+                        confirmPassword: "",
+                    });
+                    if(response.status == 208){ color = "yellow"; }
+                    // dispaly success or already registered in parent component
+                    this.props.handleMessage(response.data.message, color); 
+                    
+                    //Toggle - show the Login box
+                    //this.handleClick();                    
+                }
+            })
+            .catch(error => {
+                //console.log(error.response);
+                //clear the pevious error for loading the new error from server
+                this.setState({
+                    emailId: "",
+                    password: "",
+                    confirmPassword: "",
+                });
+                if (error.response.status == 400) {
+                    //pojo attribute and form field name should be same for this kind of validation
+                    for (let errorObj of error.response.data.fieldErrors) {
+                        this.setState({
+                            [errorObj.field]: errorObj.defaultMessage, 
+                        });
+                        errorObj.field = errorObj.defaultMessage;
+                    }
+                } else {
+                    this.props.handleMessage(error.response.data.message, "red");
+                }
+            });
+
+        registerForm.reset(); // reset the form fields
+        registerForm.classList.remove("loading");  // stop the loading
+    }
+
+    validateRegisterForm(e) {
         let emailId = this.emailId.value;
         let password = this.password.value;
         let confirmPassword = this.confirmPassword.value;
-        let emailIdErrMsg = "";
-        let passwordErrMsg = "";
-        let confirmPasswordErrMsg = "";
+        let emailIdErrMsg = "", passwordErrMsg = "", confirmPasswordErrMsg = "";
         let status = true;
 
         if (!isValidEmailId(emailId)) {
-            emailIdErrMsg = constants.EMAIL.VALID;
+            emailIdErrMsg = constValid.EMAIL.VALID;
             status = false;
         }
         if (password.length < 6) {
-            passwordErrMsg = constants.PASSWORD.VALID;
+            passwordErrMsg = constValid.PASSWORD.VALID;
             status = false;
         }
         if (confirmPassword.length < 6) {
-            confirmPasswordErrMsg = constants.CONFIRM_PASSWORD.VALID;
+            confirmPasswordErrMsg = constValid.CONFIRM_PASSWORD.VALID;
             status = false;
         }
         if (password !== confirmPassword) {
-            confirmPasswordErrMsg = constants.CONFIRM_PASSWORD.NOT_MATCH;
+            confirmPasswordErrMsg = constValid.CONFIRM_PASSWORD.NOT_MATCH;
             status = false;
         }
         this.setState({
@@ -52,52 +114,14 @@ class RegisterBox extends Component {
             password: passwordErrMsg,
             confirmPassword: confirmPasswordErrMsg,
         });
-
-        if (!status) {
-            // don't show this error if any field error is displayed
-            this.props.handleMessage("","");
-            return status;
-        }
-
-        axios.post('/addUser', {
-            emailId: emailId,
-            password: password,
-            confirmPassword: confirmPassword
-        })
-        .then(response => {
-            //console.log(response);
-            if (response.status == 201 || response.status == 208) {
-                this.setState({
-                    emailId: "",
-                    password: "",
-                    confirmPassword: "",
-                });
-                // dispaly success or already registered in parent component
-                this.props.handleMessage(response.data.message,"green");
-            }
-        })
-        .catch(error => {
-            //console.log(error.response);
-            this.setState({
-                emailId: "",
-                password: "",
-                confirmPassword: "",
-            });
-            if (error.response.status == 400) {
-                for (let errorObj of error.response.data.fieldErrors) {
-                    this.setState({
-                        [errorObj.field]: errorObj.defaultMessage,
-                    });
-                    errorObj.field = errorObj.defaultMessage;
-                }
-            }
-            if (error.response.status == 404 || error.response.status == 500) {
-                this.props.handleMessage(error.response.data.message, "red");
-            }
-        });
+        return status;
     }
 
     render() {
+
+        if (this.state.pageToRedirect == Common.LOGIN) {
+            return <Redirect to= {Common.LOGIN} />;
+        }
 
         const emailIdErr = this.state.emailId;
         const passwordErr = this.state.password;
@@ -110,7 +134,7 @@ class RegisterBox extends Component {
                         <Header as='h2' color='teal' textAlign='center'>
                             Sign Up your account
                         </Header>
-                        <Form size='large'>
+                        <Form id="registerForm" size='large'>
                             <Segment>
                                 <Form.Field>
                                     <div className="ui left icon input">
@@ -159,5 +183,5 @@ class RegisterBox extends Component {
     }
 }
 
-export default RegisterBox
+export default SignupBox
 

@@ -1,11 +1,12 @@
 import { computed, observable, action } from "mobx"
+import Common from '../../../Constant/Common'
 
 export class HomeStore {
-  @observable user = []
-  @observable company = []
-  @observable isLoggedIn = "New"
+  @observable user = {}
+  @observable company = {}
+  @observable isLoggedIn = Common.NO
   @observable custError = {}
-  @observable globalError = []
+  @observable globalError = {}
 
   @action setUser(user){
     this.user = user;

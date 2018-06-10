@@ -1,4 +1,4 @@
-import home from '../Component/Home/HomeStore';
+import home from '../Component/Layout/Home/HomeStore';
 
 const stores = {
     home

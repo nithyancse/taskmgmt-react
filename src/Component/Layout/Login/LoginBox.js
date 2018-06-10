@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 import { Button, Form, Grid, Header, Message, Segment, Divider, Label } from 'semantic-ui-react'
 import { Redirect } from 'react-router'
 import { observer, inject } from 'mobx-react';
-import { isValidEmailId } from '../../Util/ValidationUtil'
-import constants from '../../Constant/Validation'
+import { isValidEmailId } from '../../../Util/ValidationUtil'
+import constValid from '../../../Constant/Validation'
+import Common from '../../../Constant/Common'
 
 @inject(['store'])
 @observer
@@ -23,62 +24,39 @@ class LoginBox extends Component {
     }
 
     handleClick() {
-        this.props.onClick();
+        this.setState({
+            pageToRedirect: Common.SIGNUP
+        });
     }
 
     handleLoginSubmit(e) {
-
-        let emailId = this.emailId.value;
-        let password = this.password.value;
-        let emailIdErrMsg = "";
-        let passwordErrMsg = "";
-        let status = true;
-
-        if (!emailId) {
-            emailIdErrMsg = constants.EMAIL.ENTER;
-            status = false;
-        } else {
-            /* if (!isValidEmailId(emailId)) {
-                emailIdErrMsg = constants.EMAIL.VALID;
-                status = false;
-            } */
-        }
-        if (!password) {
-            passwordErrMsg = constants.PASSWORD.ENTER;
-            status = false;
-        }
-        this.setState({
-            emailIdErr: emailIdErrMsg,
-            passwordErr: passwordErrMsg,
-        });
-
-        if (!status) {
-            // don't show this error if any field error is displayed
-            this.props.handleMessage("", "");
+        let loginButton = document.getElementById("loginButton");
+        let isValid = this.validateLoginForm(e);
+        if (!isValid) {
+            this.props.handleMessage("", ""); // don't show this error(parent class) if any field error is displayed
             return status;
+        } else {
+            loginButton.classList.add("loading");
+            e.preventDefault();
         }
 
-        axios.get('/login', {
-            params: {
-                emailId: this.emailId.value,
-                password: this.password.value
-            }
-        })
-            .then(response => {
-                let name = [];
-                let company = [];
-                let pageToRedirect = "homePage";
+        let pageToRedirect = "";
+        let params = new URLSearchParams();
+        params.append('emailId', this.emailId.value);
+        params.append('password', this.password.value);
 
-                //console.log(response);
+        axios.post('/login', params)
+            .then(response => {
                 if (response.status == 200) {
+                    this.props.store.home.isLoggedIn = Common.YES;
                     this.props.store.home.setUser(response.data.user);
-                    this.props.store.home.setCompany(response.data.company); 
-                    name =  this.props.store.home.user.name;
-                    company =  this.props.store.home.company;   
-                    if (!name) {
-                        pageToRedirect = "addNamePage";
-                    } else if (!company) {
-                        pageToRedirect = "addCompanyPage";
+                    this.props.store.home.setCompany(response.data.company);
+                    if (!this.props.store.home.user.name) {
+                        pageToRedirect = Common.ADD_NAME;
+                    } else if (!this.props.store.home.company) {
+                        pageToRedirect = Common.ADD_COMPANY;
+                    } else {
+                        pageToRedirect = Common.HOME;
                     }
                     this.setState({
                         pageToRedirect: pageToRedirect
@@ -86,23 +64,52 @@ class LoginBox extends Component {
                 }
             })
             .catch(error => {
-                if (error.response.status == 400 || error.response.status == 404 || error.response.status == 500) {
-                    this.props.handleMessage(error.response.data.message, "red");
-                }
+                this.props.handleMessage(error.response.data.message, "red");
             });
+
+        loginButton.classList.remove("loading");
+    }
+
+    validateLoginForm(e) {
+        let emailId = this.emailId.value;
+        let password = this.password.value;
+        let emailIdErrMsg = "", passwordErrMsg = "";
+        let status = true;
+
+        if (!emailId) {
+            emailIdErrMsg = constValid.EMAIL.ENTER;
+            status = false;
+        } else {
+            /* if (!isValidEmailId(emailId)) {
+                emailIdErrMsg = constValid.EMAIL.VALID;
+                status = false;
+            } */
+        }
+        if (!password) {
+            passwordErrMsg = constValid.PASSWORD.ENTER;
+            status = false;
+        }
+        this.setState({
+            emailIdErr: emailIdErrMsg,
+            passwordErr: passwordErrMsg,
+        });
+        return status;
     }
 
     render() {
 
         switch (this.state.pageToRedirect) {
-            case "addNamePage":
-                return <Redirect to="/addName" />;
+            case Common.ADD_NAME:
+                return <Redirect to={Common.ADD_NAME} />;
                 break;
-            case "addCompanyPage":
-                return <Redirect to="/addCompany" />;
+            case Common.ADD_COMPANY:
+                return <Redirect to={Common.ADD_COMPANY} />;
                 break;
-            case "homePage":
-                return <Redirect to="/home" />;
+            case Common.HOME:
+                return <Redirect to={Common.HOME} />;
+                break;
+            case Common.SIGNUP:
+                return <Redirect to={Common.SIGNUP} />;
                 break;
         }
 
@@ -116,7 +123,7 @@ class LoginBox extends Component {
                         <Header as='h2' color='teal' textAlign='center'>
                             Login to your account
                         </Header>
-                        <Form size='large'>
+                        <Form id="loginForm" size='large'>
                             <Segment>
                                 <Form.Field>
                                     <div className="ui left icon input">
@@ -140,7 +147,7 @@ class LoginBox extends Component {
                                         {passwordErr.length > 0 && <Label pointing='left'>{passwordErr}</Label>}
                                     </div>
                                 </Form.Field>
-                                <Button color='teal' fluid size='large' onClick={this.handleLoginSubmit}>Login</Button>
+                                <Button id="loginButton" color='teal' fluid size='large' onClick={this.handleLoginSubmit}>Login</Button>
                             </Segment>
                         </Form>
                         <Message>
