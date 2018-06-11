@@ -4,7 +4,7 @@ import { Redirect } from 'react-router'
 import { Button, Form, Grid, Header, Message, Segment, Label } from 'semantic-ui-react'
 import { isValidEmailId } from '../../../Util/ValidationUtil'
 import constValid from '../../../Constant/Validation'
-import Common from '../../../Constant/Common'
+import RedirectTo from '../../../Constant/RedirectTo'
 
 class SignupBox extends Component {
 
@@ -22,7 +22,7 @@ class SignupBox extends Component {
 
     handleClick() {
         this.setState({
-            pageToRedirect: Common.LOGIN,
+            pageToRedirect: RedirectTo.LOGIN,
         });
     }
 
@@ -119,8 +119,8 @@ class SignupBox extends Component {
 
     render() {
 
-        if (this.state.pageToRedirect == Common.LOGIN) {
-            return <Redirect to= {Common.LOGIN} />;
+        if (this.state.pageToRedirect == RedirectTo.LOGIN) {
+            return <Redirect to= {RedirectTo.LOGIN} />;
         }
 
         const emailIdErr = this.state.emailId;

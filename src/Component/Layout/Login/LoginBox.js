@@ -6,6 +6,7 @@ import { observer, inject } from 'mobx-react';
 import { isValidEmailId } from '../../../Util/ValidationUtil'
 import constValid from '../../../Constant/Validation'
 import Common from '../../../Constant/Common'
+import RedirectTo from '../../../Constant/RedirectTo'
 
 @inject(['store'])
 @observer
@@ -25,7 +26,7 @@ class LoginBox extends Component {
 
     handleClick() {
         this.setState({
-            pageToRedirect: Common.SIGNUP
+            pageToRedirect: RedirectTo.SIGNUP
         });
     }
 
@@ -52,11 +53,11 @@ class LoginBox extends Component {
                     this.props.store.home.setUser(response.data.user);
                     this.props.store.home.setCompany(response.data.company);
                     if (!this.props.store.home.user.name) {
-                        pageToRedirect = Common.ADD_NAME;
+                        pageToRedirect = RedirectTo.ADD_NAME;
                     } else if (!this.props.store.home.company) {
-                        pageToRedirect = Common.ADD_COMPANY;
+                        pageToRedirect = RedirectTo.ADD_COMPANY;
                     } else {
-                        pageToRedirect = Common.HOME;
+                        pageToRedirect = RedirectTo.HOME;
                     }
                     this.setState({
                         pageToRedirect: pageToRedirect
@@ -99,17 +100,17 @@ class LoginBox extends Component {
     render() {
 
         switch (this.state.pageToRedirect) {
-            case Common.ADD_NAME:
-                return <Redirect to={Common.ADD_NAME} />;
+            case RedirectTo.ADD_NAME:
+                return <Redirect to={RedirectTo.ADD_NAME} />;
                 break;
-            case Common.ADD_COMPANY:
-                return <Redirect to={Common.ADD_COMPANY} />;
+            case RedirectTo.ADD_COMPANY:
+                return <Redirect to={RedirectTo.ADD_COMPANY} />;
                 break;
-            case Common.HOME:
-                return <Redirect to={Common.HOME} />;
+            case RedirectTo.HOME:
+                return <Redirect to={RedirectTo.HOME} />;
                 break;
-            case Common.SIGNUP:
-                return <Redirect to={Common.SIGNUP} />;
+            case RedirectTo.SIGNUP:
+                return <Redirect to={RedirectTo.SIGNUP} />;
                 break;
         }
 

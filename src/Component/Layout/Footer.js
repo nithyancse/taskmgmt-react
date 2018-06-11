@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, Header, Grid, Icon, Button, Segment, Menu, Dropdown, Label, Container, List  } from 'semantic-ui-react'
+import { Image, Header, Grid, Icon, Button, Segment, Menu, Dropdown, Label, Container, List } from 'semantic-ui-react'
 import { Redirect } from 'react-router'
 
 const Footer = () =>
@@ -28,12 +28,12 @@ const Footer = () =>
                                 </List>
                             </Grid.Column>
                             <Grid.Column width={8}>
-                                <Header as='h4' inverted>
-                                    Footer Header
-                                    </Header>
-                                <p>
-                                    Extra space for a call to action inside the footer that could help re-engage users.
-                                    </p>
+                            <Header inverted as='h4' content='Task Management' />
+                                <List link inverted>
+                                    <List.Item >All Rights Reserved © taskmgmt.com</List.Item>
+                                    <List.Item >Contact us at support©taskmgmt.com</List.Item>
+                                    <List.Item >Done by <a href="#"> Nithyanandam Thangamuthu </a> </List.Item>
+                                </List>
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>
@@ -42,5 +42,5 @@ const Footer = () =>
         </div>
     )
 
-    export default Footer
+export default Footer
 

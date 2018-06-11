@@ -2,17 +2,14 @@ import axios from 'axios'
 import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { Redirect } from 'react-router'
-import { Input, Icon, Button, Container } from 'semantic-ui-react'
-import Header from '../Layout/Header'
-import Footer from '../Layout/Footer'
-import constError from '../../Constant/Error'
-import Error from '../Util/Message/Error'
-import Common from '../../Constant/Common'
-
+import { Input, Icon, Button, Container, Grid, Header } from 'semantic-ui-react'
+import constError from '../../../Constant/Error'
+import Error from '../../Util/Message/Error'
+import RedirectTo from '../../../Constant/RedirectTo'
 
 @inject(['store'])
 @observer
-class ContentAddCompany extends Component {
+class CompanyBox extends Component {
 
     constructor(props) {
         super(props);
@@ -53,7 +50,7 @@ class ContentAddCompany extends Component {
                 //console.log(response);
                 this.props.store.home.setCompany(response.data.company);
                 this.setState({
-                    pageToRedirect: Common.HOME
+                    pageToRedirect: RedirectTo.HOME
                 });
             })
             .catch(error => {
@@ -93,8 +90,8 @@ class ContentAddCompany extends Component {
     render() {
 
         switch (this.state.pageToRedirect) {
-            case Common.HOME:
-                return <Redirect to={Common.HOME} />;
+            case RedirectTo.HOME:
+                return <Redirect to={RedirectTo.HOME} />;
                 break;
         }
 
@@ -102,15 +99,35 @@ class ContentAddCompany extends Component {
 
         return (
             <div>
-                <Input ref={this.handleRef} placeholder='Company Name' size='large' onChange={this.handleMessage} />
-                {/*<div className="ui left icon input"> <input  placeholder='File' type="file" onChange={this.handleFile} /> </div>*/}
-                <span className="padLR7" >
-                    <Button id="arrowButton" circular color='green' size="large" icon='arrow right' onClick={this.handleCompanySubmit.bind(this)} />
-                </span>
-                {errorMsg.length > 0 && <Error message={this.state.errorMsg} />}
+                <Grid>
+                    <Grid.Row>
+                        <Grid.Column>
+                            <Header as='h1'>Add Company Page</Header>
+                            <Header as='h3'>Manage your workload, communicate with your team and celebrate success</Header>
+                            <Header as='h4'>
+                                Manage your workload, communicate with your team and celebrate success
+                                Manage your workload, communicate with your team and celebrate success
+                                Manage your workload, communicate with your team and celebrate success
+                                Manage your workload, communicate with your team and celebrate success
+                            </Header>
+                        </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row >
+                        <Grid.Column width={10}>
+                            <Input fluid ref={this.handleRef} placeholder='Your Company Name' size='large' onChange={this.handleMessage} />
+                            {/*<div className="ui left icon input"> <input  placeholder='File' type="file" onChange={this.handleFile} /> </div>*/}
+                            {errorMsg.length > 0 && <Error message={this.state.errorMsg} />}
+                        </Grid.Column>
+                        <Grid.Column width={2}>
+                            <Button id="arrowButton" circular color='green' size="large" icon='arrow right' onClick={this.handleCompanySubmit.bind(this)} />
+                        </Grid.Column>
+                        <Grid.Column width={4}>
+                        </Grid.Column>
+                    </Grid.Row>
+                </Grid>
             </div>
         )
     }
 }
 
-export default ContentAddCompany
+export default CompanyBox

@@ -3,6 +3,7 @@ import { Image, Header, Grid, Icon, Button, Segment, Menu, Dropdown, Label, Cont
 import { observer, inject } from 'mobx-react';
 import { Redirect } from 'react-router'
 import Common from '../../Constant/Common'
+import RedirectTo from '../../Constant/RedirectTo'
 
 @inject(['store'])
 @observer
@@ -17,32 +18,38 @@ class LogoBar extends Component {
 
     handleLoginClick = () => {
         this.setState({
-            pageToRedirect: Common.LOGIN,
+            pageToRedirect: RedirectTo.LOGIN,
         });
     }
 
     handleSignUpClick = () => {
         this.setState({
-            pageToRedirect: Common.SIGNUP,
+            pageToRedirect: RedirectTo.SIGNUP,
+        });
+    }
+
+    handleHomeClick = () => {
+        this.setState({
+            pageToRedirect: RedirectTo.LOGOUT,
         });
     }
 
     handleLogout = () => {
         this.props.store.home.isLoggedIn = Common.NO;
         this.setState({
-            pageToRedirect: Common.LOGOUT,
+            pageToRedirect: RedirectTo.LOGOUT,
         });
     }
 
     render() {
-        if (this.state.pageToRedirect == Common.LOGIN) {
-            return <Redirect to={Common.LOGIN} />;
+        if (this.state.pageToRedirect == RedirectTo.LOGIN) {
+            return <Redirect to={RedirectTo.LOGIN} />;
         }
-        if (this.state.pageToRedirect == Common.SIGNUP) {
-            return <Redirect to={Common.SIGNUP} />;
+        if (this.state.pageToRedirect == RedirectTo.SIGNUP) {
+            return <Redirect to={RedirectTo.SIGNUP} />;
         }
-        if (this.state.pageToRedirect == Common.LOGOUT) {
-            return <Redirect to={Common.LOGOUT} />;
+        if (this.state.pageToRedirect == RedirectTo.LOGOUT) {
+            return <Redirect to={RedirectTo.LOGOUT} />;
         }
 
         const { activeItem } = this.state
@@ -54,7 +61,7 @@ class LogoBar extends Component {
                 <Grid >
                     <Grid.Row only='computer tablet' >
                         <Menu fixed='top' inverted >
-                            <Menu.Item as='a' header>
+                            <Menu.Item as='a' header onClick={this.handleHomeClick}>
                                 <Image className="tasklogo" size='mini' src="public/images/taskMgmtLogo.png" />
                                 <span className="tasktitle" >Task Management</span>
                             </Menu.Item>
@@ -74,9 +81,8 @@ class LogoBar extends Component {
                                     <Dropdown item simple text={name} direction='right' >
                                         <Dropdown.Menu>
                                             <Dropdown.Item icon='edit' text='Edit Profile' />
-                                            <Dropdown.Item icon='globe' text='Language' />
                                             <Dropdown.Item icon='settings' text='Settings' />
-                                            <Dropdown.Item icon='settings' text='Logout' onClick={this.handleLogout} />
+                                            <Dropdown.Item icon='log out' text='Logout' onClick={this.handleLogout} />
                                         </Dropdown.Menu>
                                     </Dropdown>
                                 </Menu.Menu>

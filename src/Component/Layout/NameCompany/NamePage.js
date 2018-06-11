@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 import { observer, inject } from 'mobx-react';
 import { Redirect } from 'react-router'
 import { Segment, Divider, Grid, Container, Button, Image, Input, Icon, } from 'semantic-ui-react'
-import constError from '../../Constant/Error'
-import Error from '../Util/Message/Error'
-import Header from '../Layout/Header'
-import Footer from '../Layout/Footer'
-import ContentAddCompany from '../Layout/ContentAddCompany';
+import constError from '../../../Constant/Error'
+import Error from '../../Util/Message/Error'
+import Header from '../../Layout/Header'
+import Footer from '../../Layout/Footer'
+import NameBox from '../../Layout/NameCompany/NameBox';
 
-class AddCompanyPage extends Component {
+class NamePage extends Component {
     render() {
         return (
             <div>
@@ -18,7 +18,7 @@ class AddCompanyPage extends Component {
                     <Grid columns='equal'>
                         <Grid.Row only='computer tablet' >
                             <Grid.Column >
-                                <ContentAddCompany />
+                                <NameBox />
                             </Grid.Column>
                             <Grid.Column>
                                 <Image size='large' src="public/images/responsive2.jpg" />
@@ -26,7 +26,7 @@ class AddCompanyPage extends Component {
                         </Grid.Row>
                         <Grid.Row only='mobile' width={16}>
                             <Grid.Column>
-                                <ContentAddCompany />
+                            <NameBox />
                             </Grid.Column>
                         </Grid.Row>
                     </Grid>
@@ -37,4 +37,4 @@ class AddCompanyPage extends Component {
     }
 }
 
-export default AddCompanyPage
+export default NamePage
