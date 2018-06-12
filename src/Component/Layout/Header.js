@@ -58,9 +58,8 @@ class LogoBar extends Component {
 
         return (
             <div>
-                <Grid >
-                    <Grid.Row only='computer tablet' >
-                        <Menu fixed='top' inverted >
+                <div id="computerHeader">
+                        <Menu fluid inverted className= "borderRadius0">
                             <Menu.Item as='a' header onClick={this.handleHomeClick}>
                                 <Image className="tasklogo" size='mini' src="public/images/taskMgmtLogo.png" />
                                 <span className="tasktitle" >Task Management</span>
@@ -88,18 +87,16 @@ class LogoBar extends Component {
                                 </Menu.Menu>
                             }
                         </Menu>
-                    </Grid.Row>
-                </Grid>
-                <Grid>
-                    <Grid.Row only='mobile' >
-                        <Menu size="tiny" fixed='top' inverted >
+                        </div>
+                         <div id="mobileHeader">
+                   
+                        <Menu size="tiny" fixed='top' inverted className= "borderRadius0" >
                             <Menu.Item as='a' header>
                                 <Image className="tasklogo" size='mini' src="public/images/taskMgmtLogo.png" />
                                 <span className="tasktitle" >Task Management</span>
                             </Menu.Item>
                         </Menu>
-                    </Grid.Row>
-                </Grid>
+                        </div>
             </div>
         )
     }

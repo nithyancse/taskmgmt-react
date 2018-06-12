@@ -5,8 +5,8 @@ export class HomeStore {
   @observable user = {}
   @observable company = {}
   @observable isLoggedIn = Common.NO
-  @observable custError = {}
-  @observable globalError = {}
+  @observable registerStatus = Common.EMPTY
+  @observable registerStatusColor = Common.EMPTY
 
   @action setUser(user){
     this.user = user;
@@ -17,6 +17,16 @@ export class HomeStore {
   @action setUserName(name){
     this.user.name = name;
   }
+
+  @action setRegisterStatus(status){
+    this.registerStatus = status;
+  }
+
+  @action setRegisterStatusColor(color){
+    this.registerStatusColor = color;
+  }
+
+  
 }
 
 export default new HomeStore

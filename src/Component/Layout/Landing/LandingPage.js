@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { Segment, Divider, Grid, Container, Button, Image } from 'semantic-ui-react'
-import Header from '../Layout/Header'
-import Footer from '../Layout/Footer'
-import ContentHome1 from '../Layout/ContentHome1';
-import ContentHome2 from '../Layout/ContentHome2';
-import LoginBox from './Login/LoginBox';
-import CenterSegment from '../Util/Segment/CenterSegment'
+import ContentHome1 from './ContentHome1'
+import ContentHome2 from './ContentHome2'
+import LoginBox from '../Login/LoginBox'
+import CenterSegment from '../../../Component/Common/Segment/CenterSegment'
 
-class HomePage extends Component {
+class LandingPage extends Component {
 
     constructor(props) {
         super(props);
@@ -32,7 +30,6 @@ class HomePage extends Component {
 
         return (
             <div>
-                <Header />
                 <Container className="contain" >
                     <Grid columns='equal'>
                         <Grid.Row only='computer tablet' >
@@ -63,10 +60,9 @@ class HomePage extends Component {
                         </Grid.Row>
                     </Grid>
                 </Container>
-                <Footer />
             </div>
         )
     }
 }
 
-export default HomePage
+export default LandingPage

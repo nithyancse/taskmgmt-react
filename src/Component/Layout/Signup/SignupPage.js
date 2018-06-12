@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import { Segment, Divider, Grid, Container, Button, Image } from 'semantic-ui-react'
 import SignupBox from './SignupBox';
-import Header from '../Header'
-import Footer from '../Footer'
-import CenterSegment from '../../Util/Segment/CenterSegment'
-import ContentHome1 from '../ContentHome1';
-import ContentHome2 from '../ContentHome2';
+import CenterSegment from '../../Common/Segment/CenterSegment'
 
 class SignupPage extends Component {
     constructor(props) {
@@ -30,7 +26,6 @@ class SignupPage extends Component {
 
         return (
             <div>
-                <Header />
                 <Container className="contain" >
                     <Grid centered columns='equal'>
                         <Grid.Row >
@@ -49,7 +44,6 @@ class SignupPage extends Component {
                         </Grid.Row>
                     </Grid>
                 </Container>
-                <Footer />
             </div>
         )
     }

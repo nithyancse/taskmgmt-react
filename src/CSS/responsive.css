@@ -15,7 +15,7 @@
     padding: 3em !important;
 }
 
-/* Computer / Desktop */
+/* Computer */
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
 
 }
@@ -25,12 +25,14 @@
 
 }
 
-/* Tablet */
+/* Tablet & Computer */
 @media only screen and (min-width: 768px) {
 .loginError{
     position: absolute;
     width: 95%;
 }
+
+#mobileHeader{ display: none;}
 }
 
 /* Mobile */
@@ -46,4 +48,5 @@
 .footer{
     padding: 1em !important;
 }
+#computerHeader{ display: none;}
 }

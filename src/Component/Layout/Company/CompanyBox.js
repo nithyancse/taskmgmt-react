@@ -4,7 +4,7 @@ import { observer, inject } from 'mobx-react';
 import { Redirect } from 'react-router'
 import { Input, Icon, Button, Container, Grid, Header } from 'semantic-ui-react'
 import constError from '../../../Constant/Error'
-import Error from '../../Util/Message/Error'
+import Error from '../../Common/Message/Error'
 import RedirectTo from '../../../Constant/RedirectTo'
 
 @inject(['store'])

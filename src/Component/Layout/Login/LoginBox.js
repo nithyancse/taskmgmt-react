@@ -20,14 +20,7 @@ class LoginBox extends Component {
             emailIdErr: '',
             passwordErr: '',
         }
-        this.handleClick = this.handleClick.bind(this);
         this.handleLoginSubmit = this.handleLoginSubmit.bind(this);
-    }
-
-    handleClick() {
-        this.setState({
-            pageToRedirect: RedirectTo.SIGNUP
-        });
     }
 
     handleLoginSubmit(e) {
@@ -148,16 +141,10 @@ class LoginBox extends Component {
                                         {passwordErr.length > 0 && <Label pointing='left'>{passwordErr}</Label>}
                                     </div>
                                 </Form.Field>
+                                <div> Forgot Password </div>
                                 <Button id="loginButton" color='teal' fluid size='large' onClick={this.handleLoginSubmit}>Login</Button>
                             </Segment>
                         </Form>
-                        <Message>
-                            New to us?  <a href='#' onClick={this.handleClick}>Sign Up</a>
-                            <span className="padLR7"> (Or) </span>
-                            <Button circular color='facebook' icon='facebook' size='mini' />
-                            <Button circular color='twitter' icon='twitter' size='mini' />
-                            <Button circular icon='github' style={{ color: '#fff', backgroundColor: '#444' }} size='mini' />
-                        </Message>
                     </Grid.Column>
                 </Grid>
             </div>

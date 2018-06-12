@@ -10,7 +10,8 @@ const constValid = {
     CONFIRM_PASSWORD: {
         VALID: "Confirm Password should be min 6 digits",
         NOT_MATCH: "Confirm Password doesn't match with Password",
-    },  
+    }, 
+    AGREE : "This field required",
 };
 
 export default constValid;

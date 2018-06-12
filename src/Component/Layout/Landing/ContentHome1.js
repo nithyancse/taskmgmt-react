@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Icon, List, Grid, Header, Image } from 'semantic-ui-react'
 
-const ContentPart1 = () => (
+const ContentHome1 = () => (
     <div>
         <Header as='h1'>Home Page</Header>
         <Header as='h1'>ContentHome1 </Header>
@@ -9,4 +9,4 @@ const ContentPart1 = () => (
     </div >
 )
 
-export default ContentPart1
+export default ContentHome1
