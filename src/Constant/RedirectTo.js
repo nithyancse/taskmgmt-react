@@ -4,7 +4,7 @@ const RedirectTo = {
     ADD_NAME:"/addName",
     ADD_COMPANY:"/addCompany",
     HOME:"/home",
-    LOGOUT:"/"
+    LOGOUT:"/logout"
 };
 
 export default RedirectTo;

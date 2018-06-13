@@ -79,12 +79,6 @@ class NameBox extends Component {
                         <Grid.Column>
                             <Header as='h1'>Add Name Page</Header>
                             <Header as='h3'>Manage your workload, communicate with your team and celebrate success</Header>
-                            <Header as='h4'>
-                                Manage your workload, communicate with your team and celebrate success
-                                Manage your workload, communicate with your team and celebrate success
-                                Manage your workload, communicate with your team and celebrate success
-                                Manage your workload, communicate with your team and celebrate success
-                            </Header>
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row >
@@ -96,6 +90,16 @@ class NameBox extends Component {
                             <Button id="arrowButton" circular color='green' size="large" icon='arrow right' onClick={this.handleNameSubmit.bind(this)} />
                         </Grid.Column>
                         <Grid.Column width={4}>
+                        </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row>
+                        <Grid.Column>
+                            <Header as='h4'>
+                                Manage your workload, communicate with your team and celebrate success
+                                Manage your workload, communicate with your team and celebrate success
+                                Manage your workload, communicate with your team and celebrate success
+                                Manage your workload, communicate with your team and celebrate success
+                            </Header>
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>

@@ -1,5 +1,5 @@
 import { computed, observable, action } from "mobx"
-import Common from '../../../Constant/Common'
+import Common from '../../Constant/Common'
 
 export class HomeStore {
   @observable user = {}
@@ -24,6 +24,10 @@ export class HomeStore {
 
   @action setRegisterStatusColor(color){
     this.registerStatusColor = color;
+  }
+
+  @action setIsLoggedIn(loginStatus){
+    this.isLoggedIn = loginStatus;
   }
 
   

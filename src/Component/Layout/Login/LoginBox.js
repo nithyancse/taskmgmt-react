@@ -42,7 +42,7 @@ class LoginBox extends Component {
         axios.post('/login', params)
             .then(response => {
                 if (response.status == 200) {
-                    this.props.store.home.isLoggedIn = Common.YES;
+                    this.props.store.home.setIsLoggedIn(Common.YES);
                     this.props.store.home.setUser(response.data.user);
                     this.props.store.home.setCompany(response.data.company);
                     if (!this.props.store.home.user.name) {
@@ -141,10 +141,10 @@ class LoginBox extends Component {
                                         {passwordErr.length > 0 && <Label pointing='left'>{passwordErr}</Label>}
                                     </div>
                                 </Form.Field>
-                                <div> Forgot Password </div>
                                 <Button id="loginButton" color='teal' fluid size='large' onClick={this.handleLoginSubmit}>Login</Button>
                             </Segment>
                         </Form>
+                        <div className="forgot"><a href='#'>Forgot Password</a></div>
                     </Grid.Column>
                 </Grid>
             </div>

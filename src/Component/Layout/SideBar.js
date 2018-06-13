@@ -13,11 +13,11 @@ class SideBar extends Component {
     const { activeItem } = this.state
 
     return (
-      <div className="sideBar" >
+      <div className="sidebar" >
         <Menu inverted vertical className= "borderRadius0" >
           <Menu.Item>
             Home
-          <Menu.Menu>
+            <Menu.Menu>
               <Menu.Item
                 name='search'
                 active={activeItem === 'search'}

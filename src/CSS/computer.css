@@ -1,0 +1,30 @@
+
+/* Computer */
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+
+}
+
+/* Tablet */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+
+}
+
+/* Tablet & Computer */
+@media only screen and (min-width: 768px) {
+.contain{
+    margin-top: 3em !important;
+    margin-bottom: 3em !important;
+    min-height: 450px !important;
+}
+.computer{ 
+    display: block;
+}
+
+.loginError{
+    position: absolute;
+    width: 95%;
+}
+
+
+}
+

@@ -5,37 +5,15 @@ body {
   height: 100%;
   background-color: #ffffff;
 }
-.gray{color: gray}
-.floralwhite{color: floralwhite}
-.royalblue{color:royalblue}
-.black{color: #333333}
-.logoBar {
- 
-  border-bottom: solid 1px #e0e0e0;
-  background-color: #f7f7f7;
- 
+
+/*.ui.menu{  font-family: cursive;}*/
+
+.computer{ 
+  display: none;
 }
 
-.loginBox{
-  margin-top: 5%;
-}
-
-.facebookBox{
-  padding: 0px 0px;
-}
-.title{
-  color: green !important;
-  font-size: 30px !important;
-  padding-left: 7px !important;
-}
-.content{
-  height: 200px;
-  width: 400px;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  margin-top: -100px;
-  margin-left: -200px;
+.mobile{ 
+  display: none;
 }
 
 .textaligncenter{
@@ -46,23 +24,8 @@ body {
   text-align: left !important;
 }
 
-
-.padLR7{
-  padding : 0 4px;
-}
-
-.error{
-  color : floralwhite;
-  background-color: indianred;
-}
-
-.success{
-  color : floralwhite;
-  background-color: limegreen;
-}
-
-.red {
-  color: red;
+.textalignright{
+  text-align: right !important;
 }
 
 .tasklogo{
@@ -76,3 +39,9 @@ body {
 .borderRadius0{
   border-radius: 0 !important;
 }
+
+.forgot{
+  text-align: left;
+  padding-top: 12px;
+}
+

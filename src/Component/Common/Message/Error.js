@@ -4,7 +4,7 @@ export default class Error extends Component {
     render() {
         return (
             <div className="red">
-              {this.props.message}
+                {this.props.message}
             </div>
         )
     }
