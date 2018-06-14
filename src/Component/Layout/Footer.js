@@ -3,7 +3,7 @@ import { Image, Header, Grid, Icon, Button, Segment, Menu, Dropdown, Label, Cont
 import { Redirect } from 'react-router'
 
 class Footer extends Component {
-    state = { activeIndex: 2 }
+    state = { activeIndex: -1 }
 
     handleClick = (e, titleProps) => {
         const { index } = titleProps
@@ -55,8 +55,8 @@ class Footer extends Component {
                     </Segment>
                 </div>
 
-                <div className="mobile ">
-                    <Segment inverted>
+                <div className="mobile footerbottom ">
+                    <Segment inverted className="borderRadius0">
                         <Accordion inverted fluid >
                             <Accordion.Title active={activeIndex === 0} index={0} onClick={this.handleClick}>
                                 <Icon name='dropdown' />

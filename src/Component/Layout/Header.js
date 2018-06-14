@@ -6,14 +6,14 @@ import { Link } from 'react-router-dom';
 import Common from '../../Constant/Common'
 import Config from '../../Constant/Config'
 import RedirectTo from '../../Constant/RedirectTo'
-import PropTypes  from 'prop-types'
+import PropTypes from 'prop-types'
 
 @inject(['store'])
 @observer
 class LogoBar extends Component {
 
     static contextTypes = {
-        router : PropTypes.object
+        router: PropTypes.object
     }
 
     constructor(props, context) {
@@ -21,12 +21,18 @@ class LogoBar extends Component {
     }
 
     handleClick(pageToRedirect) {
-        if(RedirectTo.LOGOUT === pageToRedirect){
+        if (RedirectTo.LOGOUT === pageToRedirect) {
             //this.props.store.home.setIsLoggedIn(Common.NO);
-            window.location.href= Config.HOME_URL; // on refresh will clear the mobx data
+            window.location.href = Config.HOME_URL; // on refresh will clear the mobx data
         } else {
             this.context.router.history.push(pageToRedirect);
         }
+    }
+
+    handleOpenSideBar = (e) => {
+        let sidebardiv = document.getElementById("sidebardiv");        
+        sidebardiv.classList.remove("sidebarhide");
+        sidebardiv.classList.add("sidebaropen");
     }
 
     render() {
@@ -70,11 +76,11 @@ class LogoBar extends Component {
                         }
                     </Menu>
                 </div>
-                <div className="mobile">
+                <div className="mobile headertop">
                     <Menu size="tiny" inverted className="borderRadius0" >
                         <Menu.Item as='a' header>
-                         <Icon name='bars' size='large' />
-                            
+                            <Icon name='bars' size='large' className="tasklogo"  onClick={this.handleOpenSideBar} />  
+                            <Image circular className="tasklogo" size='mini' src="public/images/taskMgmtLogo.png" />
                             <span className="tasktitle" >Task Management</span>
                         </Menu.Item>
                     </Menu>

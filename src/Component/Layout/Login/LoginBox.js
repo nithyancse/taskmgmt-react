@@ -117,7 +117,7 @@ class LoginBox extends Component {
                         <Header as='h2' color='teal' textAlign='center'>
                             Login to your account
                         </Header>
-                        <Form id="loginForm" size='large'>
+                        <Form size='large'>
                             <Segment>
                                 <Form.Field>
                                     <div className="ui left icon input">

@@ -9,22 +9,44 @@ const Layout = props => ({
     return (
       <div className="o-container">
         <Header />
-        {location.pathname.indexOf("home") == -1 &&
-          <main>{props.children}</main>
-        }
+        {location.pathname.indexOf("home") == -1 && <main>{props.children}</main>}
         {location.pathname.indexOf("home") >= 0 &&
           <div>
-            <div className="layoutsidebar">
-              <SideBar />
+            <div className="computer">
+              <Grid>
+                <Grid.Row>
+                  <Grid.Column width={3}>
+                    <SideBar />
+                  </Grid.Column>
+                  <Grid.Column width={13}>
+                    <Container className="contain" >
+                      <main>{props.children}</main>
+                    </Container>
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
             </div>
-            <div className="layoutcontainer">
-              <Container className="contain" >
-                <main>{props.children}</main>
-              </Container>
+            <div className="mobile">
+              <SideBar />
+              <Grid stackable>
+                <Grid.Row>
+                  <Grid.Column >
+                    <Container className="contain" >
+                      <main>{props.children}</main>
+                    </Container>
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid>
             </div>
           </div>
         }
-        <Footer />
+        {location.pathname.indexOf("home") == -1 &&  <Footer />  }
+        {location.pathname.indexOf("home") >= 0 &&
+        <div className="computer"> {/*Footer not available for mobile After login*/}
+            <Footer /> 
+        </div>
+        }
+
       </div>
     );
   }

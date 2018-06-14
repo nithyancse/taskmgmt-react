@@ -4,23 +4,39 @@
     display: block;
 }
 .contain{
-    margin-top: 2em !important;
+    margin-top: 5em !important;
     margin-bottom: 2em !important;
-    min-height: 375px;
 }
 .tasktitle{
     font-size: 25px;
 }
-.layoutsidebar{
-    width: 100% !important;
-}
-.layoutcontainer{
-    width: 100% !important;
-}
-.sidebardiv{
-    display: none;
-}
 .loginBox{
     margin-top: 3em !important;
+}
+.headertop{
+    z-index: 10;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+}
+.footerbottom{
+    position: fixed;
+    left: 0px;
+    bottom: 0px;
+    width: 100%;
+}
+.loginError{
+    margin-top: 2em; 
+}
+.sidebardiv{
+    margin-top: 4em !important;
+    margin-bottom: 0em !important;
+}
+.sidebaropen{
+    display: block;
+}
+.sidebarhide{
+    display: none;
 }
 }
