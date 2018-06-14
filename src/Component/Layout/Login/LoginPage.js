@@ -52,7 +52,7 @@ class LoginPage extends Component {
                             </Grid.Column>
                             <Grid.Column  width={16} only='mobile'>
                                 {custResponse.length > 0 && <CenterSegment color={custColor} message={custResponse} />}
-                                <Segment>
+                                <Segment className="loginBox">
                                     <LoginBox onClick={this.handleClick} handleMessage={this.handleMessage} />
                                 </Segment>
                             </Grid.Column>

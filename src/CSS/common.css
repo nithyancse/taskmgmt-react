@@ -45,3 +45,7 @@ body {
   padding-top: 12px;
 }
 
+.width100{
+  width: 100% !important;
+}
+

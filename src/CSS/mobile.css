@@ -3,14 +3,24 @@
 .mobile{ 
     display: block;
 }
-    
 .contain{
-    margin-top: 7em !important;
+    margin-top: 2em !important;
     margin-bottom: 2em !important;
     min-height: 375px;
 }
 .tasktitle{
     font-size: 25px;
 }
-
+.layoutsidebar{
+    width: 100% !important;
+}
+.layoutcontainer{
+    width: 100% !important;
+}
+.sidebardiv{
+    display: none;
+}
+.loginBox{
+    margin-top: 3em !important;
+}
 }

@@ -13,8 +13,8 @@ class SideBar extends Component {
     const { activeItem } = this.state
 
     return (
-      <div className="sidebar" >
-        <Menu inverted vertical className= "borderRadius0" >
+      <div className="sidebardiv">
+        <Menu inverted vertical stackable className= "width100 borderRadius0 sidebarmenu" >
           <Menu.Item>
             Home
             <Menu.Menu>

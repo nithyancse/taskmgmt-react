@@ -71,9 +71,10 @@ class LogoBar extends Component {
                     </Menu>
                 </div>
                 <div className="mobile">
-                    <Menu size="tiny" fixed='top' inverted className="borderRadius0" >
+                    <Menu size="tiny" inverted className="borderRadius0" >
                         <Menu.Item as='a' header>
-                            <Image className="tasklogo" size='mini' src="public/images/taskMgmtLogo.png" />
+                         <Icon name='bars' size='large' />
+                            
                             <span className="tasktitle" >Task Management</span>
                         </Menu.Item>
                     </Menu>

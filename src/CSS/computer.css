@@ -1,14 +1,7 @@
-
 /* Computer */
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
-
-}
-
+@media only screen and (min-width: 992px) and (max-width: 1199px) {}
 /* Tablet */
-@media only screen and (min-width: 768px) and (max-width: 991px) {
-
-}
-
+@media only screen and (min-width: 768px) and (max-width: 991px) {}
 /* Tablet & Computer */
 @media only screen and (min-width: 768px) {
 .contain{
@@ -19,12 +12,23 @@
 .computer{ 
     display: block;
 }
-
 .loginError{
     position: absolute;
     width: 95%;
 }
-
+.loginBox{
+    margin-top: 5em !important;
+}
+.layoutsidebar{
+    width: 16% !important;
+}
+.layoutcontainer{
+    width: 84% !important;
+    
+}
+.sidebarmenu{
+    min-height: 534px !important;
+}
 
 }
 
