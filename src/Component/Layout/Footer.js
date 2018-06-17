@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserView, MobileView, isBrowser, isMobile } from "react-device-detect";
 import { Image, Header, Grid, Icon, Button, Segment, Menu, Dropdown, Label, Container, List, Accordion } from 'semantic-ui-react'
 import { Redirect } from 'react-router'
 
@@ -18,7 +19,7 @@ class Footer extends Component {
 
         return (
             <div>
-                <div className="computer">
+                <BrowserView device={isBrowser}>
                     <Segment inverted vertical >
                         <Container>
                             <Grid divided inverted stackable className="footer" >
@@ -53,9 +54,10 @@ class Footer extends Component {
                             </Grid>
                         </Container>
                     </Segment>
-                </div>
+                    </BrowserView>
+                <MobileView device={isMobile}>
 
-                <div className="mobile footerbottom ">
+                <div className="footerbottom ">
                     <Segment inverted className="borderRadius0">
                         <Accordion inverted fluid >
                             <Accordion.Title active={activeIndex === 0} index={0} onClick={this.handleClick}>
@@ -96,6 +98,7 @@ class Footer extends Component {
                         </Accordion>
                     </Segment>
                 </div>
+                </MobileView>
             </div>
         )
     }

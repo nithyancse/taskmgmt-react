@@ -5,12 +5,20 @@
 /* Tablet & Computer */
 @media only screen and (min-width: 768px) {
 .contain{
+    width: auto!important;
     margin-top: 3em !important;
     margin-bottom: 3em !important;
+    margin-left: 2em !important;
+    margin-right: 2em !important;
     min-height: 450px !important;
 }
-.computer{ 
-    display: block;
+.maincontain{
+    width: auto!important;
+    margin-top: 2em !important;
+    margin-bottom: 3em !important;
+    margin-left: 1em !important;
+    margin-right: 2em !important;
+    min-height: 450px !important;
 }
 .loginError{
     position: absolute;

@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { Image, Header, Grid, Icon, Button, Segment, Menu, Dropdown, Label, Container } from 'semantic-ui-react'
+import { BrowserView, MobileView, isBrowser, isMobile } from "react-device-detect";
 import { observer, inject } from 'mobx-react';
 import { Redirect } from 'react-router'
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types'
 import Common from '../../Constant/Common'
 import Config from '../../Constant/Config'
 import RedirectTo from '../../Constant/RedirectTo'
-import PropTypes from 'prop-types'
+import MobileSideBar from './MobileSideBar'
 
 @inject(['store'])
 @observer
@@ -18,9 +20,12 @@ class LogoBar extends Component {
 
     constructor(props, context) {
         super(props, context);
+        this.state = {
+            sidebarStatus: false
+        }
     }
 
-    handleClick(pageToRedirect) {
+    handleRedirect(pageToRedirect) {
         if (RedirectTo.LOGOUT === pageToRedirect) {
             //this.props.store.home.setIsLoggedIn(Common.NO);
             window.location.href = Config.HOME_URL; // on refresh will clear the mobx data
@@ -29,10 +34,10 @@ class LogoBar extends Component {
         }
     }
 
-    handleOpenSideBar = (e) => {
-        let sidebardiv = document.getElementById("sidebardiv");        
-        sidebardiv.classList.remove("sidebarhide");
-        sidebardiv.classList.add("sidebaropen");
+    handleSideBar = (e) => {
+        this.setState(prevState => ({
+            sidebarStatus: !prevState.sidebarStatus
+        }));
     }
 
     render() {
@@ -42,14 +47,14 @@ class LogoBar extends Component {
 
         return (
             <div>
-                <div className="computer">
+                <BrowserView device={isBrowser}>
                     <Menu fluid inverted className="borderRadius0">
-                        <Menu.Item as='a' header onClick={() => this.handleClick(RedirectTo.LOGOUT)}>
+                        <Menu.Item as='a' header onClick={() => this.handleRedirect(RedirectTo.LOGOUT)}>
                             <Image className="tasklogo" size='mini' src="public/images/taskMgmtLogo.png" />
                             <span className="tasktitle" >Task Management</span>
                         </Menu.Item>
                         {/*<Menu.Item as='a'>Home</Menu.Item>*/}
-                        {isLoggedIn == Common.NO &&
+                        {!isLoggedIn &&
                             <Menu.Menu position='right'>
                                 <Menu.Item>
                                     <Link to={RedirectTo.LOGIN}>
@@ -63,28 +68,31 @@ class LogoBar extends Component {
                                 </Menu.Item>
                             </Menu.Menu>
                         }
-                        {isLoggedIn == Common.YES &&
+                        {isLoggedIn &&
                             <Menu.Menu position='right'>
                                 <Dropdown item simple text={name} direction='right' >
                                     <Dropdown.Menu>
                                         <Dropdown.Item icon='edit' text='Edit Profile' />
                                         <Dropdown.Item icon='settings' text='Settings' />
-                                        <Dropdown.Item icon='log out' text='Logout' onClick={() => this.handleClick(RedirectTo.LOGOUT)} />
+                                        <Dropdown.Item icon='log out' text='Logout' onClick={() => this.handleRedirect(RedirectTo.LOGOUT)} />
                                     </Dropdown.Menu>
                                 </Dropdown>
                             </Menu.Menu>
                         }
                     </Menu>
-                </div>
-                <div className="mobile headertop">
+                </BrowserView>
+                <MobileView device={isMobile}>
                     <Menu size="tiny" inverted className="borderRadius0" >
                         <Menu.Item as='a' header>
-                            <Icon name='bars' size='large' className="tasklogo"  onClick={this.handleOpenSideBar} />  
+                            {isLoggedIn &&
+                                <Icon name='bars' size='large' className="tasklogo" onClick={this.handleSideBar} />
+                            }
                             <Image circular className="tasklogo" size='mini' src="public/images/taskMgmtLogo.png" />
                             <span className="tasktitle" >Task Management</span>
                         </Menu.Item>
                     </Menu>
-                </div>
+                    <MobileSideBar status={this.state.sidebarStatus} handleSideBar={this.handleSideBar} />
+                </MobileView>
             </div>
         )
     }

@@ -4,15 +4,22 @@ import Common from '../../Constant/Common'
 export class HomeStore {
   @observable user = {}
   @observable company = {}
-  @observable isLoggedIn = Common.NO
+  @observable isLoggedIn = false
   @observable registerStatus = Common.EMPTY
   @observable registerStatusColor = Common.EMPTY
+
+  @observable menuList = {}
 
   @action setUser(user){
     this.user = user;
   }
+
   @action setCompany(company){
     this.company = company;
+  }
+
+  @action setMenuList(menuList){
+    this.menuList = menuList;
   }
   @action setUserName(name){
     this.user.name = name;

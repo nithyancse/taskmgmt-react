@@ -42,14 +42,14 @@ class LoginBox extends Component {
         axios.post('/login', params)
             .then(response => {
                 if (response.status == 200) {
-                    this.props.store.home.setIsLoggedIn(Common.YES);
+                    this.props.store.home.setIsLoggedIn(true);
                     this.props.store.home.setUser(response.data.user);
                     this.props.store.home.setCompany(response.data.company);
                     if (!this.props.store.home.user.name) {
                         pageToRedirect = RedirectTo.ADD_NAME;
                     } else if (!this.props.store.home.company) {
-                        pageToRedirect = RedirectTo.ADD_COMPANY;
-                    } else {
+                        pageToRedirect = RedirectTo.ADD_COMPANY;} 
+                    else {
                         pageToRedirect = RedirectTo.HOME;
                     }
                     this.setState({

@@ -1,5 +1,5 @@
-.floatLeft { float: left;}
-.floatRight { float: right;}
+.floatLeft { float: left !important;}
+.floatRight { float: right !important;}
 
 body {
   height: 100%;
@@ -7,14 +7,6 @@ body {
 }
 
 /*.ui.menu{  font-family: cursive;}*/
-
-.computer{ 
-  display: none;
-}
-
-.mobile{ 
-  display: none;
-}
 
 .textaligncenter{
   text-align: center !important;

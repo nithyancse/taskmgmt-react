@@ -26,7 +26,7 @@ class LoginPage extends Component {
         });
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.setState({
             custResponse: this.props.store.home.registerStatus,
             custColor: this.props.store.home.registerStatusColor,
@@ -40,25 +40,23 @@ class LoginPage extends Component {
         const custColor = this.state.custColor;
 
         return (
-            <div>
-                <Container className="contain" >
-                    <Grid centered columns='equal'>
-                        <Grid.Row >
-                            <Grid.Column width={7} only='computer tablet'>
+            <div className="contain" >
+                <Grid centered columns='equal'>
+                    <Grid.Row >
+                        <Grid.Column width={7} only='computer tablet'>
                             {custResponse.length > 0 && <CenterSegment color={custColor} message={custResponse} />}
-                                <Segment className="loginBox">
-                                    <LoginBox onClick={this.handleClick} handleMessage={this.handleMessage} />
-                                </Segment>
-                            </Grid.Column>
-                            <Grid.Column  width={16} only='mobile'>
-                                {custResponse.length > 0 && <CenterSegment color={custColor} message={custResponse} />}
-                                <Segment className="loginBox">
-                                    <LoginBox onClick={this.handleClick} handleMessage={this.handleMessage} />
-                                </Segment>
-                            </Grid.Column>
-                        </Grid.Row>
-                    </Grid>
-                </Container>
+                            <Segment className="loginBox">
+                                <LoginBox onClick={this.handleClick} handleMessage={this.handleMessage} />
+                            </Segment>
+                        </Grid.Column>
+                        <Grid.Column width={16} only='mobile'>
+                            {custResponse.length > 0 && <CenterSegment color={custColor} message={custResponse} />}
+                            <Segment className="loginBox">
+                                <LoginBox onClick={this.handleClick} handleMessage={this.handleMessage} />
+                            </Segment>
+                        </Grid.Column>
+                    </Grid.Row>
+                </Grid>
             </div>
         )
     }

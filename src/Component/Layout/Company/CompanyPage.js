@@ -10,24 +10,22 @@ import CompanyBox from './CompanyBox';
 class CompanyPage extends Component {
     render() {
         return (
-            <div>
-                <Container className="contain" >
-                    <Grid columns='equal'>
-                        <Grid.Row only='computer tablet' >
-                            <Grid.Column >
-                                <CompanyBox />
-                            </Grid.Column>
-                            <Grid.Column>
-                                <Image size='large' src="public/images/responsive2.jpg" />
-                            </Grid.Column>
-                        </Grid.Row>
-                        <Grid.Row only='mobile' width={16}>
-                            <Grid.Column>
-                                <CompanyBox />
-                            </Grid.Column>
-                        </Grid.Row>
-                    </Grid>
-                </Container>
+            <div className="contain" >
+                <Grid columns='equal'>
+                    <Grid.Row only='computer tablet' >
+                        <Grid.Column >
+                            <CompanyBox />
+                        </Grid.Column>
+                        <Grid.Column>
+                            <Image size='large' src="public/images/responsive2.jpg" />
+                        </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row only='mobile' width={16}>
+                        <Grid.Column>
+                            <CompanyBox />
+                        </Grid.Column>
+                    </Grid.Row>
+                </Grid>
             </div>
         )
     }

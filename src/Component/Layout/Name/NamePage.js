@@ -10,24 +10,22 @@ import NameBox from './NameBox';
 class NamePage extends Component {
     render() {
         return (
-            <div>
-                <Container className="contain" >
-                    <Grid columns='equal'>
-                        <Grid.Row only='computer tablet' >
-                            <Grid.Column >
-                                <NameBox />
-                            </Grid.Column>
-                            <Grid.Column>
-                                <Image size='large' src="public/images/responsive2.jpg" />
-                            </Grid.Column>
-                        </Grid.Row>
-                        <Grid.Row only='mobile' width={16}>
-                            <Grid.Column>
+            <div className="contain" >
+                <Grid columns='equal'>
+                    <Grid.Row only='computer tablet' >
+                        <Grid.Column >
                             <NameBox />
-                            </Grid.Column>
-                        </Grid.Row>
-                    </Grid>
-                </Container>
+                        </Grid.Column>
+                        <Grid.Column>
+                            <Image size='large' src="public/images/responsive2.jpg" />
+                        </Grid.Column>
+                    </Grid.Row>
+                    <Grid.Row only='mobile' width={16}>
+                        <Grid.Column>
+                            <NameBox />
+                        </Grid.Column>
+                    </Grid.Row>
+                </Grid>
             </div>
         )
     }
